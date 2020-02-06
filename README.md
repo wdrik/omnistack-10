@@ -1,9 +1,13 @@
 # OmniStack-10
 
-[![built with expo](https://img.shields.io/badge/MADE%20WITH%20EXPO-000.svg?style=for-the-badge&logo=expo&labelColor=4630eb&logoWidth=20)](https://github.com/expo/expo) [![supports iOS and Android](https://img.shields.io/badge/Platforms-Native-4630EB.svg?style=for-the-badge&logo=EXPO&labelColor=000&logoColor=fff)](https://github.com/expo/expo) [![follow @bruno_kiafuka](https://img.shields.io/twitter/follow/bruno_kiafuka.svg?style=for-the-badge&logo=TWITTER&logoColor=FFFFFF&labelColor=00aced&logoWidth=20&color=lightgray)](https://twitter.com/bruno_kiafuka)
+[![built with expo](https://img.shields.io/badge/MADE%20WITH%20EXPO-000.svg?style=for-the-badge&logo=expo&labelColor=4630eb&logoWidth=20)](https://github.com/expo/expo)
+
+[![supports iOS and Android](https://img.shields.io/badge/Platforms-Native-4630EB.svg?style=for-the-badge&logo=EXPO&labelColor=000&logoColor=fff)]
 
 <p align="center">
   <img src="screenshots/v1.png?raw=true" />
+  <img src="screenshots/screen.gif?raw=true" />
+  <img src="https://thumbs.gfycat.com/GrotesqueWideBat-size_restricted.gif" width="200"/>
 </p>
 
 ## 🚀 Tech
@@ -31,4 +35,3 @@
 - [ ] Create Audio Player view
 - [ ] Split Stacks into independent files
 - [ ] Create splash screen and app icon
-
