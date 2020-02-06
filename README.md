@@ -4,6 +4,7 @@
 
 <p align="center">
   <img src="screenshots/screen.gif?raw=true" />
+  <img src="screenshots/screen.gif?raw=true" />
 </p>
 
 ## 🚀 Tech
