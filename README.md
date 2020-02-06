@@ -27,7 +27,4 @@
 
 ## 🔖 TODO
 
-- [ ] Add PropTypes to components
-- [ ] Create Audio Player view
-- [ ] Split Stacks into independent files
-- [ ] Create splash screen and app icon
+- [ ] Add TODO here!
