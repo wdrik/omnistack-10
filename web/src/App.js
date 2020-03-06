@@ -8,6 +8,8 @@ import "./Sidebar.css";
 import "./Main.css";
 
 function App() {
+  const [devs, setDevs] = useState([]);
+
   const [githubUsername, setGithubUsername] = useState("");
   const [techs, setTechs] = useState("");
   const [latitude, setLatitude] = useState("");
@@ -30,10 +32,20 @@ function App() {
     );
   }, []);
 
+  useEffect(() => {
+    async function loadDevs() {
+      const response = await api.get("/devs");
+
+      setDevs(response.data);
+    }
+
+    loadDevs();
+  }, []);
+
   async function handleAddDev(e) {
     e.preventDefault();
 
-    await api.post("/devs", {
+    const response = await api.post("/devs", {
       github_username: githubUsername,
       techs,
       latitude,
@@ -42,6 +54,7 @@ function App() {
 
     setGithubUsername("");
     setTechs("");
+    setDevs([...devs, response.data]);
   }
 
   return (
@@ -104,89 +117,28 @@ function App() {
 
       <main>
         <ul>
-          <li className="dev-item">
-            <header>
-              <img
-                src="https://avatars1.githubusercontent.com/u/19880078?s=460&v=4"
-                alt="wdrik"
-              />
+          {devs.map(dev => (
+            <li key={dev._id} className="dev-item">
+              <header>
+                <img src={dev.avatar_url} alt={dev.name} />
 
-              <div className="user-info">
-                <strong>Iorgen Wildrik</strong>
-                <span>ReactJS, React Native, NodeJS</span>
-              </div>
-            </header>
+                <div className="user-info">
+                  <strong>{dev.name}</strong>
+                  <span>{dev.techs.join(", ")}</span>
+                </div>
+              </header>
 
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias ut
-              iste soluta in.
-            </p>
+              <p>{dev.bio}</p>
 
-            <a href="https://github.com/wdrik">Acessar perfil no github</a>
-          </li>
-
-          <li className="dev-item">
-            <header>
-              <img
-                src="https://avatars1.githubusercontent.com/u/19880078?s=460&v=4"
-                alt="wdrik"
-              />
-
-              <div className="user-info">
-                <strong>Iorgen Wildrik</strong>
-                <span>ReactJS, React Native, NodeJS</span>
-              </div>
-            </header>
-
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias ut
-              iste soluta in.
-            </p>
-
-            <a href="https://github.com/wdrik">Acessar perfil no github</a>
-          </li>
-
-          <li className="dev-item">
-            <header>
-              <img
-                src="https://avatars1.githubusercontent.com/u/19880078?s=460&v=4"
-                alt="wdrik"
-              />
-
-              <div className="user-info">
-                <strong>Iorgen Wildrik</strong>
-                <span>ReactJS, React Native, NodeJS</span>
-              </div>
-            </header>
-
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias ut
-              iste soluta in.
-            </p>
-
-            <a href="https://github.com/wdrik">Acessar perfil no github</a>
-          </li>
-
-          <li className="dev-item">
-            <header>
-              <img
-                src="https://avatars1.githubusercontent.com/u/19880078?s=460&v=4"
-                alt="wdrik"
-              />
-
-              <div className="user-info">
-                <strong>Iorgen Wildrik</strong>
-                <span>ReactJS, React Native, NodeJS</span>
-              </div>
-            </header>
-
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias ut
-              iste soluta in.
-            </p>
-
-            <a href="https://github.com/wdrik">Acessar perfil no github</a>
-          </li>
+              <a
+                href={`https://github.com/${dev.github_username}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Acessar perfil no github
+              </a>
+            </li>
+          ))}
         </ul>
       </main>
     </div>
