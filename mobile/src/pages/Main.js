@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-
-import { StyleSheet } from "react-native";
-
-import MavView from "react-native-maps";
+import { StyleSheet, Image, View, Text } from "react-native";
+import MavView, { Marker, Callout } from "react-native-maps";
 import {
   requestPermissionsAsync,
   getCurrentPositionAsync
 } from "expo-location";
 
-export default function Main() {
+export default function Main({ navigation }) {
   const [currentRegion, setCurrentRegion] = useState(null);
 
   useEffect(() => {
@@ -36,9 +34,64 @@ export default function Main() {
 
   if (!currentRegion) return null;
 
-  return <MavView initialRegion={currentRegion} style={styles.map} />;
+  return (
+    <MavView initialRegion={currentRegion} style={styles.map}>
+      <Marker coordinate={{ latitude: -23.5874967, longitude: -46.5423404 }}>
+        <Image
+          style={styles.avatar}
+          source={{
+            uri: "https://avatars1.githubusercontent.com/u/19880078?s=460&v=4"
+          }}
+        />
+        <Callout
+          style={styles.callout}
+          onPress={() => {
+            navigation.navigate("Profile", { github_username: "wdrik" });
+          }}
+        >
+          <View>
+            <Text style={styles.devName}>Iorgen Wildrik</Text>
+            <Text style={styles.devBio}>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            </Text>
+            <Text style={styles.devTechs}>ReactJS, NodeJS</Text>
+          </View>
+        </Callout>
+      </Marker>
+    </MavView>
+  );
 }
 
+// -23.5874967,-46.5423404
+
 const styles = StyleSheet.create({
-  map: { flex: 1 }
+  map: { flex: 1 },
+
+  avatar: {
+    width: 54,
+    height: 54,
+    borderRadius: 4,
+    borderWidth: 4,
+    borderColor: "#FFF"
+  },
+
+  callout: {
+    width: 260
+  },
+
+  devName: {
+    fontWeight: "bold",
+    color: "#333",
+    fontSize: 16
+  },
+
+  devBio: {
+    color: "#666",
+    marginTop: 5
+  },
+
+  devTechs: {
+    color: "#333",
+    marginTop: 5
+  }
 });
