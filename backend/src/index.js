@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const http = require('http');
 const routes = require('./routes');
+const { setupWebsocket } = require('./websocket');
 
 // --> Métodos HTPP: GET, POST, PUT, DELETE
 
@@ -12,6 +13,9 @@ const routes = require('./routes');
 // Body: request.body (Dados para criação ou alteração de um registro)
 
 const app = express();
+const server = http.Server(app);
+
+setupWebsocket(server);
 
 mongoose.connect('mongodb+srv://omnistack:1234@cluster0-nhv9j.mongodb.net/omnistack10?retryWrites=true&w=majority', {
   useNewUrlParser: true,
@@ -23,4 +27,4 @@ app.use(cors());
 app.use(express.json());
 app.use(routes);
 
-app.listen(3333);
+server.listen(3333);
